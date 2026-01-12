@@ -56,4 +56,4 @@ if __name__ == "__main__":
     generate_synthetic_logs(1000, "raw_logs.csv")
 
     #These logs will we used for testing and to simulate 'New' tasks
-    generate_synthetic_logs(500, "incoming_tasks.csv")
+    generate_synthetic_logs(50, "incoming_tasks.csv")

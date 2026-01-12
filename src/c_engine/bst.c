@@ -1,6 +1,8 @@
 #include "resources.h"
 #include "bst.h"
 
+Node* root = NULL;
+
 // insert_task funciton: The function will insert a new task in the Binary Search Tree as per its priority and execution time as predicted by the model coefficients.
 void insert_task(Task t){
     Node* new_node = (Node*)malloc(sizeof(Node)); 
@@ -85,4 +87,28 @@ Task get_next(){
     free(target);
 
     return result;
+}
+
+void inorder_traversal(Node* node){    
+    if (node == NULL){
+        return;
+    }
+
+    inorder_traversal(node -> left);
+
+    printf("|| %-5d | %-20s | %-10d | %-10d | %-10.2f ||\n", 
+        node -> task.process_id, 
+        node -> task.task_name, 
+        node -> task.priority, 
+        node -> task.input_data, 
+        node -> task.predicted_time);
+
+    inorder_traversal(node -> right);
+}
+
+void print_tree(){
+    printf("SCHEDULED TASKS - SORTED BY PRIORITY AND TIME\n\n\n");
+    printf("|| %-5s | %-20s | %-10s | %-10s | %-10s ||\n\n",
+    "ID", "Task", "Priority", "Input(MB)", "Time(ms)");
+    inorder_traversal(root); 
 }

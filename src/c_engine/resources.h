@@ -10,7 +10,6 @@
 typedef struct{
     int process_id;
     char task_name[32];
-    int task_id;
     int input_data;
     int priority;
     float execution_time;
