@@ -3,7 +3,9 @@
 
 Node* root = NULL;
 
-// insert_task funciton: The function will insert a new task in the Binary Search Tree as per its priority and execution time as predicted by the model coefficients.
+// {insert_task} funciton: The function will insert a new task in the Binary 
+// Search Tree as per its priority and execution time as predicted by the 
+// model coefficients.
 void insert_task(Task t){
     Node* new_node = (Node*)malloc(sizeof(Node)); 
     
@@ -11,6 +13,7 @@ void insert_task(Task t){
     new_node -> left = NULL;
     new_node -> right = NULL;
 
+    // Condition to set the first node inserted as the 'root' node
     if (root == NULL){
         root = new_node;
         return;
@@ -48,6 +51,7 @@ void insert_task(Task t){
     };
 }
 
+// {get_next} function gets new tasks and omits them from the original BST
 Task get_next(){
     //Empty Tree Case
     if (root == NULL){
@@ -89,6 +93,8 @@ Task get_next(){
     return result;
 }
 
+// {inorder_traversal} recursively gets items in their increasing order of 
+// execution priority and predicted time to execute.
 void inorder_traversal(Node* node){    
     if (node == NULL){
         return;
@@ -106,6 +112,7 @@ void inorder_traversal(Node* node){
     inorder_traversal(node -> right);
 }
 
+// Prints the tree in a tabular structure.
 void print_tree(){
     printf("SCHEDULED TASKS - SORTED BY PRIORITY AND TIME\n\n\n");
     printf("|| %-5s | %-20s | %-10s | %-10s | %-10s ||\n\n",

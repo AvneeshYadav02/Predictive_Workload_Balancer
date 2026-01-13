@@ -5,13 +5,16 @@
 #include "bst.h"
 #include "resources.h"
 
+// Coefficients acquired from the trained Linear Regression model.
 #define COEFF_DISK_IO 10.0041
 #define COEFF_HEAVY_COMP 50.0002
 #define COEFF_OS_ROUT 3.0518
 #define COEFF_USER_INTER 4.9865
 
-#define SIM_SPEED 0.005
+//Simulation speed, currently at 100%.
+#define SIM_SPEED 0.01
 
+// Loads tasks from a csv file and creates a tree.
 void load_tasks(const char* filename){
     FILE *fp;
     fp = fopen(filename, "r");
@@ -46,6 +49,7 @@ void load_tasks(const char* filename){
         token = strtok(NULL, ",");
         new_task.execution_time = atoi(token);
 
+        // Uses appropriate coefficient for the tasks.
         switch (new_task.task_id) {
             case 0:
                 new_task.predicted_time = COEFF_OS_ROUT*(new_task.input_data);
@@ -84,6 +88,7 @@ int main(){
 
         int wait_time = (current_task.execution_time*1000) * SIM_SPEED;
         
+        // Checking for negative conditions.
         if (wait_time < 0){
             wait_time = 0;
         }
@@ -94,6 +99,7 @@ int main(){
             current_task.priority, 
             current_task.predicted_time);
 
+        // Freezing the output terminal for the set time.
         usleep(wait_time);
 
         printf("Time Taken: %.2fms\n\n", current_task.execution_time);
