@@ -51,7 +51,7 @@ void insert_task(Task t){
 Task get_next(){
     //Empty Tree Case
     if (root == NULL){
-        printf("EMPTY TREE!\nINSERT NEW TASKS!");
+        printf("\nTASKS FINISHED!\n");
         Task empty_task = {0};
         empty_task.process_id = -1; 
         return empty_task;
