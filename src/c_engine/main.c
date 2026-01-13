@@ -10,7 +10,7 @@
 #define COEFF_OS_ROUT 3.0518
 #define COEFF_USER_INTER 4.9865
 
-#define SIM_SPEED 0.015
+#define SIM_SPEED 0.005
 
 void load_tasks(const char* filename){
     FILE *fp;
@@ -71,8 +71,12 @@ int main(){
 
     printf("Tasks Loaded\n------------------------STARTING EXECUTION------------------------\n\n");
 
+    int task_no = 0;
+
     while(1){
         Task current_task = get_next();
+        
+        task_no++;
 
         if (current_task.process_id == -1){
             break;
@@ -84,7 +88,11 @@ int main(){
             wait_time = 0;
         }
 
-        printf("Executing %s\nTask Priority: %d\nPredicted Execution Time: %.2fms\n", current_task.task_name, current_task.priority, current_task.predicted_time);
+        printf("S.No - %d\nExecuting %s\nTask Priority: %d\nPredicted Execution Time: %.2fms\n", 
+            task_no,
+            current_task.task_name, 
+            current_task.priority, 
+            current_task.predicted_time);
 
         usleep(wait_time);
 
